@@ -1,7 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
+// dCC provided custom hook for simplified user authentication
 import useAuth from "../../hooks/useAuth";
 
 const HomePage = () => {
@@ -28,6 +30,7 @@ const HomePage = () => {
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
+      <Link to='/addcar'>Add Car!</Link>
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
