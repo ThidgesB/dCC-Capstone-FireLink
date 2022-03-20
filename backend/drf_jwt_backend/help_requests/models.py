@@ -16,6 +16,7 @@ class HelpRequest(models.Model):
     details = models.CharField(max_length=500)
     active_state = models.BooleanField()
     players_requested = models.IntegerField()
+    
 
 class ActiveHelpers(models.Model):
     is_active = models.BooleanField()
