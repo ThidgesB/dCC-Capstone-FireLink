@@ -8,8 +8,8 @@ class ForumPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     body = models.CharField(max_length=1000)
-    date_posted = models.DateTimeField()
-    rating = models.IntegerField(blank=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    rating = models.IntegerField(blank=True, default=0)
 
 
 class Comments(models.Model):

@@ -6,19 +6,18 @@ import useAuth from '../../hooks/useAuth';
 import useCustomForm from '../../hooks/useCustomForm'
 
 let initialValues = {
-    make: "",
-    model: "",
-    year: "",
+    title: "",
+    body: ""
 };
 
-const AddCarPage = () => {
+const CreatePostPage = () => {
     const [user, token] = useAuth();
     const navigate = useNavigate();
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewCar)
+    const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, createNewPost)
 
-    async function postNewCar(){
+    async function createNewPost(){
         try {
-            let response = await axios.post('http://127.0.0.1:8000/api/cars/', formData, {
+            let response = await axios.post('http://127.0.0.1:8000/api/forum_posts/user/posts/', formData, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
@@ -33,33 +32,24 @@ const AddCarPage = () => {
         <div className='container'>
             <form className='form' onSubmit={handleSubmit}>
                 <label>
-                    Make:{" "}
+                    Title:{" "}
                     <input
                         type='text'
-                        name='make'
-                        value={formData.make}
+                        name='title'
+                        value={formData.title}
                         onChange={handleInputChange}
                     />
                 </label>
                 <label>
-                    Model:{" "}
+                    Body:{" "}
                     <input
                         type='text'
-                        name='model'
-                        value={formData.model}
+                        name='body'
+                        value={formData.body}
                         onChange={handleInputChange}
                     />
                 </label>
-                <label>
-                    Year:{" "}
-                    <input
-                        type='text'
-                        name='year'
-                        value={formData.year}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <button type='submit' >Add Car</button>
+                <button type='submit' >Create Post</button>
             </form>
         </div>
     )
@@ -67,4 +57,4 @@ const AddCarPage = () => {
 }
 
 
-export default AddCarPage
+export default CreatePostPage
