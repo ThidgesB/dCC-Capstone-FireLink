@@ -9,6 +9,7 @@ class ForumPost(models.Model):
     title = models.CharField(max_length=50)
     body = models.CharField(max_length=1000)
     date_posted = models.DateTimeField()
+    rating = models.IntegerField(blank=True)
 
 
 class Comments(models.Model):
@@ -16,3 +17,8 @@ class Comments(models.Model):
     post = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
     date_posted = models.DateTimeField()
     text = models.CharField(max_length=500)
+
+class PostRating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
+    score = models.IntegerField()

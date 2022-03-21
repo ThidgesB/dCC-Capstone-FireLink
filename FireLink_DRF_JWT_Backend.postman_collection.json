@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "08de30ae-2a6c-4e16-a1ac-605c0384ec8f",
+		"name": "FireLink_DRF_JWT_Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dantheman\",\r\n    \"password\": \"password1@\",\r\n    \"email\": \"dan@devcodecamp.com\",\r\n    \"first_name\": \"Daniel\",\r\n    \"last_name\": \"Tulpa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dantheman\",\r\n    \"password\": \"password1@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh_Access",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh\": \"PASTE REFRESH TOKEN FROM LOGIN HERE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/refresh/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "GET all cars (unprotected)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cars/all/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cars",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET cars for user (protected)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MTU2ODM5LCJpYXQiOjE2NDcyOTI4MzksImp0aSI6ImJjYzJhZTUzOTRlYzQ3OThiNjI0YTcwYTYzYjcxOThmIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJqanZlZ2EiLCJmaXJzdF9uYW1lIjoiIn0.l9ATW5CpWF2TGniqVgU1I-a8LkuqgLQ4ok3tJh6asAA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cars/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cars",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST new car for user (protected)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MTU3MjczLCJpYXQiOjE2NDcyOTMyNzMsImp0aSI6IjIyMDQ4YTg2NzEzMTQyMmZhZjJmNDNmYmI2MTExZDg2IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIn0.DeTe47E7-9eCr7xKE22m3CvFMDj0Sxye5A6ndwJ024M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"make\": \"Ford\",\n    \"model\": \"F150\",\n    \"year\": 1999\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cars/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cars",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Help_Requests",
+			"item": [
+				{
+					"name": "Get All Help Requests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/help_requests/all/requests",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"help_requests",
+								"all",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Platforms",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/help_requests/all/platforms",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"help_requests",
+								"all",
+								"platforms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Help Requests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/help_requests/user/requests",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"help_requests",
+								"user",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Create Help Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date_posted\": \"2022-03-20\",\r\n    \"game\": \"Dark Souls 3\",\r\n    \"details\": \"Password is 'ham123', sign is Down by Crystal Sage Fog Wall\",\r\n    \"active_state\": \"true\",\r\n    \"players_requested\": \"2\",\r\n    \"platform\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/help_requests/user/requests",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"help_requests",
+								"user",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forum Posts",
+			"item": [
+				{
+					"name": "Get All Forum Posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Forum Posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/user/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								"user",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"title\": \"Recommended build for Godrick?\",\r\n        \"body\": \"Currently a level 40 mage struggling against Godrick. Any recommendations?\",\r\n        \"date_posted\": \"2022-03-20\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/user/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								"user",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/user/comments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								"user",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Create Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"post\": 3,\r\n    \"date_posted\": \"2022-03-20\",\r\n    \"text\": \"another comment test1\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/user/comments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								"user",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Edit Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"post\": 3,\r\n    \"date_posted\": \"2022-03-20\",\r\n    \"text\": \"Check test test check\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/user/editcomment/3/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								"user",
+								"editcomment",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Edit Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4NjU5MDQ3LCJpYXQiOjE2NDc3OTUwNDcsImp0aSI6IjhhMDkzNDQ0MzZkZDQ5NTM5ODkwNjRmNDZmYzc1MzEwIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0aGlkZ2VzIiwiZmlyc3RfbmFtZSI6IiJ9.1Q3GFUvtqvqRiZyb9x7CdE0ual0512sH9ghguDmZWHw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"I LOVE this site!\",\r\n    \"body\": \"I think it's WAY BETTER than Reddit!\",\r\n    \"date_posted\": \"2022-03-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/forum_posts/user/editpost/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"forum_posts",
+								"user",
+								"editpost",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

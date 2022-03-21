@@ -11,7 +11,7 @@ class HelpRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HelpRequest
-        fields = ['id', 'date_posted', 'game', 'details', 'active_state', 'players_requested', 'platform_id', 'user_id']
+        fields = ['id', 'date_posted', 'game', 'details', 'active_state', 'players_requested', 'platform', 'user_id']
 
 class PlatformTypeSerializer(serializers.ModelSerializer):
 

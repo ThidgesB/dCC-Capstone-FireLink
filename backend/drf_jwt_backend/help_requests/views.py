@@ -1,6 +1,3 @@
-from ast import Raise
-from platform import platform
-from re import search
 from django.http import Http404
 from django.shortcuts import render
 from rest_framework import status
@@ -26,6 +23,7 @@ def get_all_help_requests(request):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def user_help_requests(request):
+    print('User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
         serializer = HelpRequestSerializer(data=request.data)
         if serializer.is_valid():
