@@ -1,0 +1,5 @@
+.post-box {
+    margin: 5vh;
+    border: 1px solid red;
+    box-sizing: border-box;
+  }
