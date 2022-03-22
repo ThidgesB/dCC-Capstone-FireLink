@@ -98,9 +98,11 @@ const HomePage = () => {
                   <div>{post.date_posted}</div>
                   <body>{post.body}</body>
                   <div>Rating: {post.rating}</div>
+                  {user.id == post.user.id && 
                   <button type="button" onClick={() => onEditPost(post)}>
                     Edit
                   </button>
+                  }
                 </p>
               </div>
             ))
