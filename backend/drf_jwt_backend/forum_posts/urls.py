@@ -7,5 +7,7 @@ urlpatterns = [
     path('user/comments/', views.user_comments),
     path('all/ratings/', views.user_ratings),
     path('user/editpost/<int:pk>/', views.edit_post),
-    path('user/editcomment/<int:pk>/', views.edit_comment)
+    path('user/editcomment/<int:pk>/', views.edit_comment),
+    path('user/deletepost/<int:pk>/', views.delete_post),
+    path('user/deletecomment/<int:pk>/', views.delete_comment)
 ]

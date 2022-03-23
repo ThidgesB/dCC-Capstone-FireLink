@@ -86,3 +86,35 @@ def edit_comment(request, pk):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_post(request, pk):
+    try:
+        post = ForumPost.objects.get(pk=pk)
+    except ForumPost.DoesNotExist:
+        raise Http404
+    if request.method == 'DELETE':
+        operation = post.delete()
+        data = {}
+        if operation:
+            data["success"] = "delete successful"
+        else:
+            data["failure"] = "delete failed"
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_comment(request, pk):
+    try:
+        comment = Comments.objects.get(pk=pk)
+    except Comments.DoesNotExist:
+        raise Http404
+    if request.method == 'DELETE':
+        operation = comment.delete()
+        data = {}
+        if operation:
+            data["success"] = "delete successful"
+        else:
+            data["failure"] = "delete failed"
+    return Response(status=status.HTTP_204_NO_CONTENT)

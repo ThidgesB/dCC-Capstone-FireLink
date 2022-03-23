@@ -1,7 +1,6 @@
 import {Modal} from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+
 
 import useAuth from '../../hooks/useAuth';
 import useCustomForm from '../../hooks/useCustomForm'
@@ -10,21 +9,10 @@ import useCustomForm from '../../hooks/useCustomForm'
 const FormModal = props => {
 
     const [user, token] = useAuth();
-    const navigate = useNavigate();
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(props.initialValues, createNewPost)
+    
+    const [formData, handleInputChange, handleSubmit] = useCustomForm(props.initialValues, props.submit, props.token, props.postId)
 
-    async function createNewPost(){
-        try {
-            let response = await axios.post('http://127.0.0.1:8000/api/forum_posts/user/posts/', formData, {
-                headers: {
-                    Authorization: 'Bearer ' + token
-                }
-            })
-            navigate('/')
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
+    
 
 
     return (
@@ -50,7 +38,7 @@ const FormModal = props => {
                             onChange={handleInputChange}
                         />
                     </label>
-                    <button type='submit' onClick={props.handleClose} >Post</button>
+                    <button type='submit' onClick={props.handleClose} >Confirm</button>
                 </form>
             </div>
             </Modal>
