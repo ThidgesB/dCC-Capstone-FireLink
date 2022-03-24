@@ -38,6 +38,20 @@ const HelpRequestPage = () => {
       setEditRequestModalState(false);
     }
 
+    const onDeleteRequest = (request) => {
+      deleteRequest(request)
+    }
+
+    async function deleteRequest(request){
+      let response = await axios.delete(
+        `http://127.0.0.1:8000/api/help_requests/user/requests/delete/${request.id}/`, {
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        }
+      )
+    }
+
     useEffect(() => {
         const fetchRequests = async () => {
           try {
@@ -114,6 +128,11 @@ const HelpRequestPage = () => {
                   {user.id === request.user.id &&
                     <button type="button" onClick={() => onEditRequest(request)}>
                       Edit
+                    </button>
+                  }
+                  {user.id === request.user.id &&
+                    <button type='button' onClick={() => onDeleteRequest(request)}>
+                      Delete      
                     </button>
                   }
                 </div>
