@@ -38,11 +38,37 @@ const CreateReqModal = props => {
                                 type='text'
                                 name='game'
                                 value={formData.game}
+                                onChange={handleInputChange}
                             />
                         </label>
                         <label>
-                            
+                            Details:{" "}
+                            <input
+                                type='text'
+                                name='details'
+                                value={formData.details}
+                                onChange={handleInputChange}
+                            />
+                        </label>    
+                        <label>
+                            No. of players needed:{" "}
+                            <input
+                                type='number'
+                                name='playersRequested'
+                                value={formData.playersRequested}
+                                onChange={handleInputChange}
+                            />
                         </label>
+                        <label>
+                            Platform:{" "}
+                            <input
+                                type='number'
+                                name='platform'
+                                value={formData.platform}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <button type='submit' onClick={props.handleClose} >Confirm</button>
                     </form>
                 </div>
             </Modal>

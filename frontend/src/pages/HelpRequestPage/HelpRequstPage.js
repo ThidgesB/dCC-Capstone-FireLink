@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import CreateReqModal from "../../components/CreateReqModal/CreateReqModal";
 
 const HelpRequestPage = () => {
 
@@ -16,6 +17,10 @@ const HelpRequestPage = () => {
     const handleOfferClick = () => {
       setOfferState(!offerState)
     }
+
+    const handleClose = () => {
+      setRequestFormModalState(false);
+    };
 
 
     const onCreateRequest = () => {
@@ -66,33 +71,46 @@ const HelpRequestPage = () => {
 
 
       return (
-        <div className="container">
-        <h1>Multiplayer Request Page for {user.username}!</h1>
-        <button type="button" onClick={onCreateRequest}>
-          Create
-        </button>
-        {requests &&
-          requests
-            .map((request) => (
-              <div className="post-box">
-                  <div>{request.user.username}</div>
-                  <h4>{request.platform.platform_name}</h4>
-                  <h4>{request.game}</h4>
-                  <div>
-                      {request.date_posted}
+        <>
+          <CreateReqModal
+            show={requestFormModalState}
+            handleClose={handleClose}
+            initialValues={{
+              game: "",
+              details: "",
+              active_state: "true",
+              players_requested: "2",
+              platform: ""
+            }}
+          />
+          <div className="container">
+          <h1>Multiplayer Request Page for {user.username}!</h1>
+          <button type="button" onClick={onCreateRequest}>
+            Create
+          </button>
+          {requests &&
+            requests
+              .map((request) => (
+                <div className="post-box">
+                    <div>{request.user.username}</div>
+                    <h4>{request.platform.platform_name}</h4>
+                    <h4>{request.game}</h4>
+                    <div>
+                        {request.date_posted}
+                    </div>
+                    <div>
+                      Players Requested: {request.players_requested}
                   </div>
-                  <div>
-                    Players Requested: {request.players_requested}
+                  {user.id != request.user.id && 
+                  <button type="button" onClick={handleOfferClick}>
+                  Offer
+                </button>
+                  }
+                  
                 </div>
-                {user.id != request.user.id && 
-                <button type="button" onClick={handleOfferClick}>
-                Offer
-              </button>
-                }
-                
-              </div>
-            )).reverse()}
-      </div>
+              )).reverse()}
+        </div>
+        </>
       )
 
 
