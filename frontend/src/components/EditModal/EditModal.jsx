@@ -36,7 +36,7 @@ const EditModal = props => {
                         <input
                             type='text'
                             name='title'
-                            value={props.postTitle}
+                            value={formData.title}
                             onChange={handleInputChange}
                         />
                     </label>
@@ -45,7 +45,7 @@ const EditModal = props => {
                         <input
                             type='text'
                             name='body'
-                            value={props.postBody}
+                            value={formData.body}
                             onChange={handleInputChange}
                         />
                     </label>

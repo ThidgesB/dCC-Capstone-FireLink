@@ -8,7 +8,7 @@ from .models import PlatformType
 from .models import RequestType
 from .models import HelpRequest
 from .models import ActiveHelpers
-from .serializers import HelpRequestSerializer, PlatformTypeSerializer, ActiveHelperSerializer
+from .serializers import HelpRequestSerializer, PlatformTypeSerializer, ActiveHelperSerializer, PostHelpRequestSerializer
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -25,7 +25,7 @@ def get_all_help_requests(request):
 def user_help_requests(request):
     print('User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
-        serializer = HelpRequestSerializer(data=request.data)
+        serializer = PostHelpRequestSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

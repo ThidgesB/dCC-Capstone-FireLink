@@ -15,6 +15,11 @@ const Navbar = () => {
             <b>FireLink</b>
           </Link>
         </li>
+        <li className="HRPage">
+          <Link to="/helprequests" style={{ textDecoration: "none", color: "#FF3D00" }}>
+            <b>Requests</b>
+          </Link>
+        </li>
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>

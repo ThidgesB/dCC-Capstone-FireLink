@@ -11,7 +11,7 @@ class PlatformType(models.Model):
 class HelpRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     platform = models.ForeignKey(PlatformType, on_delete=models.CASCADE)
-    date_posted = models.DateTimeField()
+    date_posted = models.DateTimeField(auto_now_add=True)
     game = models.CharField(max_length=50)
     details = models.CharField(max_length=500)
     active_state = models.BooleanField()

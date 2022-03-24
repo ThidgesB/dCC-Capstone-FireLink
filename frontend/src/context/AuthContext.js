@@ -12,7 +12,11 @@ export const AuthProvider = ({ children }) => {
   const userToken = JSON.parse(localStorage.getItem("token"));
   const decodedToken = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
-  const [user, setUser] = useState(decodedToken);
+  const [user, setUser] = useState({
+    username: decodedToken.username,
+    id: decodedToken.user_id,
+    first_name: decodedToken.first_name,
+  });
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 

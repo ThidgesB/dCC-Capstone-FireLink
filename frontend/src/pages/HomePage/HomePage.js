@@ -1,13 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import axios from "axios";
 // dCC provided custom hook for simplified user authentication
 import useAuth from "../../hooks/useAuth";
 
 import FormModal from "../../components/Modal/FormModal";
-import { propTypes } from "react-bootstrap/esm/Image";
 import "./HomePage.css";
 import EditModal from "../../components/EditModal/EditModal";
 
@@ -16,6 +14,8 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   const [user, token] = useAuth();
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
+  const uid = user.id || user.user_id
 
   const [postId, setPostId] = useState("");
   const [postTitle, setPostTitle] = useState("");
@@ -62,6 +62,41 @@ const HomePage = () => {
     fetchPosts();
   }, [token]);
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        let response = await axios.get(
+          "http://127.0.0.1:8000/api/forum_posts/comments/",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        setComments(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchComments();
+  }, [token]);
+
+
+  const onDeletePost = (post) => {
+    delete_post(post)
+  }
+
+  async function delete_post(post){
+    let response = await axios.delete(
+      `http://127.0.0.1:8000/api/forum_posts/user/deletepost/${post.id}/`, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }
+    )
+  }
+
+
   return (
     <>
       <FormModal
@@ -102,6 +137,9 @@ const HomePage = () => {
                   <button type="button" onClick={() => onEditPost(post)}>
                     Edit
                   </button>
+                  }
+                  {user.id == post.user.id &&
+                  <button type="button" onClick={() => onDeletePost(post)}>Delete</button>
                   }
                 </p>
               </div>
