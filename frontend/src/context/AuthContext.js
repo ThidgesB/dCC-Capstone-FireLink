@@ -12,11 +12,7 @@ export const AuthProvider = ({ children }) => {
   const userToken = JSON.parse(localStorage.getItem("token"));
   const decodedToken = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
-  const [user, setUser] = useState({
-    username: decodedToken.username,
-    id: decodedToken.user_id,
-    first_name: decodedToken.first_name,
-  });
+  const [user, setUser] = useState(setUserObject(decodedToken));
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
@@ -41,7 +37,19 @@ export const AuthProvider = ({ children }) => {
       console.log(error.message);
     }
   };
+  function setUserObject(user){
+    if(!user){
+      return null
+    }
+    else{
+      return{
+        username: user.username,
+        id: user.user_id,
+        first_name: user.first_name,
+      }
+    }
 
+  }
   const loginUser = async (loginData) => {
     try {
       let response = await axios.post(`${BASE_URL}/login/`, loginData);
@@ -49,11 +57,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(response.data.access));
         setToken(JSON.parse(localStorage.getItem("token")));
         let loggedInUser = jwtDecode(response.data.access);
-        setUser({
-          username: loggedInUser.username,
-          id: loggedInUser.user_id,
-          first_name: loggedInUser.first_name,
-        });
+        setUser(setUserObject(loggedInUser));
         setIsServerError(false);
         navigate("/");
       } else {

@@ -78,3 +78,32 @@ def active_helpers(request):
         requests = ActiveHelpers.objects.filter(user_id=request.user.id)
         serializer = ActiveHelperSerializer(requests, many=True)
         return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_request(request, pk):
+    try:
+        help_request = HelpRequest.objects.get(pk=pk)
+    except HelpRequest.DoesNotExist:
+        raise Http404
+    if request.method == 'DELETE':
+        operation = help_request.delete()
+        data = {}
+        if operation:
+            data["success"] = "delete successful"
+        else:
+            data["failure"] = "delete failed"
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def edit_request(request, pk):
+    try:
+        help_request = HelpRequest.objects.get(pk=pk)
+    except HelpRequest.DoesNotExist:
+        raise Http404
+    serializer = HelpRequestSerializer(help_request, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

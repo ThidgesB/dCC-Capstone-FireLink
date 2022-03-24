@@ -3,16 +3,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import CreateReqModal from "../../components/CreateReqModal/CreateReqModal";
+import EditRequestModal from "../../components/EditRequestModal/EditRequestModal";
 
 const HelpRequestPage = () => {
 
     const [user, token] = useAuth();
     const [requests, setRequests] = useState([]);
-    const [platforms, setPlatforms] = useState([]);
+    //const [platforms, setPlatforms] = useState([]);
     const [offerState, setOfferState] = useState(false);
     const [requestFormModalState, setRequestFormModalState] = useState(false);
     const [editRequestModalState, setEditRequestModalState] = useState(false);
-    const uid = user.id || user.user_id
+    const [requestId, setRequestId] = useState("");
+    
 
     const handleOfferClick = () => {
       setOfferState(!offerState)
@@ -27,26 +29,14 @@ const HelpRequestPage = () => {
       setRequestFormModalState(true)
     }
 
+    const onEditRequest = (request) => {
+      setEditRequestModalState(true);
+      setRequestId(request.id)
+    }
 
-    // useEffect(() => {
-    //     const fetchPlatforms = async () => {
-    //       try {
-    //         let response = await axios.get(
-    //           "http://127.0.0.1:8000/api/help_requests/all/platforms",
-    //           {
-    //             headers: {
-    //               Authorization: "Bearer " + token,
-    //             },
-    //           }
-    //         );
-    //         setPlatforms(response.data);
-    //       } catch (error) {
-    //         console.log(error.message);
-    //       }
-    //     };
-    //     fetchPlatforms();
-    //   }, [token]);
-
+    const handleEditClose = () => {
+      setEditRequestModalState(false);
+    }
 
     useEffect(() => {
         const fetchRequests = async () => {
@@ -79,7 +69,19 @@ const HelpRequestPage = () => {
               game: "",
               details: "",
               active_state: "true",
-              players_requested: "2",
+              players_requested: "",
+              platform: ""
+            }}
+          />
+          <EditRequestModal 
+            show={editRequestModalState}
+            handleClose={handleEditClose}
+            requestId={requestId}
+            initialValues={{
+              game: "",
+              details: "",
+              active_state: "true",
+              players_requested: "",
               platform: ""
             }}
           />
@@ -101,12 +103,19 @@ const HelpRequestPage = () => {
                     <div>
                       Players Requested: {request.players_requested}
                   </div>
-                  {user.id != request.user.id && 
+                  <div>
+                    Details: {request.details}
+                  </div>
+                  {user.id !== request.user.id && 
                   <button type="button" onClick={handleOfferClick}>
                   Offer
                 </button>
                   }
-                  
+                  {user.id === request.user.id &&
+                    <button type="button" onClick={() => onEditRequest(request)}>
+                      Edit
+                    </button>
+                  }
                 </div>
               )).reverse()}
         </div>

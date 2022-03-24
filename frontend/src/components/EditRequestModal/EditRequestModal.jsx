@@ -1,22 +1,19 @@
 import {Modal} from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import useAuth from '../../hooks/useAuth';
 import useCustomForm from '../../hooks/useCustomForm'
+import { useState } from 'react';
 
-const CreateReqModal = props => {
-
+const EditRequestModal = props => {
 
     const [user, token] = useAuth();
-    const navigate = useNavigate();
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(props.initialValues, createRequest)
+    const [formData, handleInputChange, handleSubmit] = useCustomForm(props.initialValues, editRequest)
 
 
-    async function createRequest(){
+    async function editRequest(){
         try {
-            let response = await axios.post('http://127.0.0.1:8000/api/help_requests/user/requests/', formData, {
+            let response = await axios.put(`http://127.0.0.1:8000/api/help_requests/user/requests/edit/${props.requestId}/`, formData, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
@@ -31,26 +28,26 @@ const CreateReqModal = props => {
         <div className='modal'>
             <Modal show={props.show} onHide={props.handleClose} >
                 <div className='modal-content'>
-                    <form className='form' onSubmit={handleSubmit}>
-                        <label>
-                            Game:{" "}
-                            <input 
-                                type='text'
-                                name='game'
-                                value={formData.game}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <label>
-                            Details:{" "}
-                            <input
-                                type='text'
-                                name='details'
-                                value={formData.details}
-                                onChange={handleInputChange}
-                            />
-                        </label>    
-                        <label>
+                <form className='form' onSubmit={handleSubmit}>
+                    <label>
+                        Game:{""}
+                        <input
+                            type='text'
+                            name='game'
+                            value={formData.game}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <label>
+                        Details:{""}
+                        <input
+                            type='text'
+                            name='details'
+                            value={formData.details}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <label>
                             No. of players needed:{" "}
                             <input
                                 type='number'
@@ -68,32 +65,14 @@ const CreateReqModal = props => {
                                 onChange={handleInputChange}
                             />
                         </label>
-                        <button type='submit' onClick={props.handleClose} >Confirm</button>
-                    </form>
+                    <button type='submit' onClick={props.handleClose}>Confirm</button>
+                </form>
                 </div>
             </Modal>
         </div>
     )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
-export default CreateReqModal
+export default EditRequestModal

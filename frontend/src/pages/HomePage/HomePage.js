@@ -14,7 +14,7 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   const [user, token] = useAuth();
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
+  //const [comments, setComments] = useState([]);
   const uid = user.id || user.user_id
 
   const [postId, setPostId] = useState("");
@@ -62,24 +62,24 @@ const HomePage = () => {
     fetchPosts();
   }, [token]);
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        let response = await axios.get(
-          "http://127.0.0.1:8000/api/forum_posts/comments/",
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-        setComments(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchComments();
-  }, [token]);
+  // useEffect(() => {
+  //   const fetchComments = async () => {
+  //     try {
+  //       let response = await axios.get(
+  //         "http://127.0.0.1:8000/api/forum_posts/comments/",
+  //         {
+  //           headers: {
+  //             Authorization: "Bearer " + token,
+  //           },
+  //         }
+  //       );
+  //       setComments(response.data);
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
+  //   fetchComments();
+  // }, [token]);
 
 
   const onDeletePost = (post) => {
