@@ -15,7 +15,7 @@ class ForumPost(models.Model):
 class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
-    date_posted = models.DateTimeField()
+    date_posted = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=500)
 
 class PostRating(models.Model):

@@ -22,7 +22,7 @@ class CommentsSerializer(serializers.ModelSerializer):
         fields = ['id', 'post', 'date_posted', 'text', 'user']
 
 class PostRatingSerializer(serializers.ModelSerializer):
-
+    
     class Meta:
         model = PostRating
         fields = ['id', 'score', 'post', 'user_id']

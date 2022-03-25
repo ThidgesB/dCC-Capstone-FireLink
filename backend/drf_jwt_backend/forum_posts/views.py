@@ -20,6 +20,13 @@ def get_all_forum_posts(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def get_all_ratings(request):
+    ratings = PostRating.objects.all()
+    serializer = PostRatingSerializer(ratings, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_all_comments(request):
     comments = Comments.objects.all()
     serializer = CommentsSerializer(comments, many=True)

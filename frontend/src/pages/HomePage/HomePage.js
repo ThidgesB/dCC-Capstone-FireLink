@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import FormModal from "../../components/Modal/FormModal";
 import "./HomePage.css";
 import EditModal from "../../components/EditModal/EditModal";
+import CommentModal from "../../components/CommentModal/CommentModal";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -15,7 +16,6 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const [posts, setPosts] = useState([]);
   //const [comments, setComments] = useState([]);
-  const uid = user.id || user.user_id
 
   const [postId, setPostId] = useState("");
   const [postTitle, setPostTitle] = useState("");
@@ -23,6 +23,7 @@ const HomePage = () => {
 
   const [showFormModalState, setShowFormModalState] = useState(false);
   const [showEditModalState, setShowEditModalState] = useState(false);
+  const [showCommentModalState, setShowCommentModalState] = useState(false);
 
   const handleClose = () => {
     setShowFormModalState(false);
@@ -31,6 +32,15 @@ const HomePage = () => {
   const handleEditClose = () => {
     setShowEditModalState(false);
   };
+
+  const handleCommentClose = () => {
+    setShowCommentModalState(false);
+  }
+
+  const onCommentClick = (post) => {
+    setShowCommentModalState(true);
+    setPostId(post.id);
+  }
 
   const onCreatePost = () => {
     setShowFormModalState(true);
@@ -61,25 +71,6 @@ const HomePage = () => {
     };
     fetchPosts();
   }, [token]);
-
-  // useEffect(() => {
-  //   const fetchComments = async () => {
-  //     try {
-  //       let response = await axios.get(
-  //         "http://127.0.0.1:8000/api/forum_posts/comments/",
-  //         {
-  //           headers: {
-  //             Authorization: "Bearer " + token,
-  //           },
-  //         }
-  //       );
-  //       setComments(response.data);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   fetchComments();
-  // }, [token]);
 
 
   const onDeletePost = (post) => {
@@ -118,6 +109,15 @@ const HomePage = () => {
           body: "",
         }}
       />
+      <CommentModal 
+        postId={postId}
+        show={showCommentModalState}
+        handleClose={handleCommentClose}
+        initialValues={{
+          post: postId,
+          text: ""
+        }}
+      />
       <div className="container">
         <h1>Home Page for {user.username}!</h1>
         <button type="button" onClick={onCreatePost}>
@@ -141,6 +141,9 @@ const HomePage = () => {
                   {user.id == post.user.id &&
                   <button type="button" onClick={() => onDeletePost(post)}>Delete</button>
                   }
+                  <button type="button" onClick={() => onCommentClick(post)}>
+                    Comments
+                  </button>
                 </p>
               </div>
             ))
