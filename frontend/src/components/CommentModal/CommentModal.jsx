@@ -5,14 +5,26 @@ import axios from "axios";
 
 import useAuth from "../../hooks/useAuth";
 import useCustomForm from "../../hooks/useCustomForm";
+import EditComment from "../EditComment/EditComment";
 
 const CommentModal = (props) => {
   const [user, token] = useAuth();
   const [formData, handleInputChange, handleSubmit] = useCustomForm(props.initialValues, createComment);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("")
-  const [commentPostId, setCommentPostId] = useState("");
+  const [commentId, setcommentId] = useState("");
+  const [editCommentShowState, setEditCommentShowState] = useState(false)
+  
 
+  const handleEditCommentClose = () => {
+    setEditCommentShowState(false)
+  }
+
+
+  const handleEditCommentShowState = (commentId) => {
+    setcommentId(commentId)
+    setEditCommentShowState(true)
+  }
 
     async function createComment(){
       try {
@@ -26,6 +38,8 @@ const CommentModal = (props) => {
         console.log(error.message)
       }
     }
+
+  
 
   async function onCommentSubmit(){
     try {
@@ -42,6 +56,19 @@ const CommentModal = (props) => {
       console.log(error.message);
     }
   };
+
+  async function deleteComment(commentId){
+    let response = await axios.delete(
+      `http://127.0.0.1:8000/api/forum_posts/user/deletecomment/${commentId}/`, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }
+    )
+    await onCommentSubmit();
+  }
+
+
   
 
 
@@ -66,7 +93,19 @@ const CommentModal = (props) => {
 
   return (
     <>
+     
       <div className="modal">
+        <> <EditComment 
+        onCommentSubmit={onCommentSubmit}
+        show={editCommentShowState}
+        handleClose={handleEditCommentClose}
+        postId={props.postId}
+        commentId={commentId}
+        initialValues={{
+          text: "",
+          post: props.postId
+        }} 
+      /></>
         <Modal show={props.show} onHide={props.handleClose}>
           <div className="modal-content">
               <form className="form" onSubmit={handleSubmit}>
@@ -89,11 +128,17 @@ const CommentModal = (props) => {
                       <>
                         <h3>{comment.user.username}</h3>
                         <i>{comment.date_posted}</i>
-                        <p>{comment.text}</p>
-                      </>
+                        <p>{comment.text}</p>       
+                        {user.id === comment.user.id && 
+                        <>
+                        <button type="button" onClick={() => handleEditCommentShowState(comment.id)}>Edit</button>
+                        <button type="button" onClick={() => deleteComment(comment.id)}>Delete</button></>
+                        }
+                        </>
                     )}
                   </div>
                 )).reverse()}
+                
             </div>
           </div>
         </Modal>
