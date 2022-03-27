@@ -35,12 +35,12 @@ const HomePage = () => {
 
   const handleCommentClose = () => {
     setShowCommentModalState(false);
-  }
+  };
 
   const onCommentClick = (post) => {
     setShowCommentModalState(true);
     setPostId(post.id);
-  }
+  };
 
   const onCreatePost = () => {
     setShowFormModalState(true);
@@ -49,8 +49,8 @@ const HomePage = () => {
   const onEditPost = (post) => {
     setShowEditModalState(true);
     setPostId(post.id);
-    setPostTitle(post.title)
-    setPostBody(post.body)
+    setPostTitle(post.title);
+    setPostBody(post.body);
   };
 
   useEffect(() => {
@@ -72,21 +72,20 @@ const HomePage = () => {
     fetchPosts();
   }, [token]);
 
-
   const onDeletePost = (post) => {
-    delete_post(post)
-  }
+    delete_post(post);
+  };
 
-  async function delete_post(post){
+  async function delete_post(post) {
     let response = await axios.delete(
-      `http://127.0.0.1:8000/api/forum_posts/user/deletepost/${post.id}/`, {
+      `http://127.0.0.1:8000/api/forum_posts/user/deletepost/${post.id}/`,
+      {
         headers: {
-          Authorization: 'Bearer ' + token
-        }
+          Authorization: "Bearer " + token,
+        },
       }
-    )
+    );
   }
-
 
   return (
     <>
@@ -109,46 +108,112 @@ const HomePage = () => {
           body: "",
         }}
       />
-      <CommentModal 
+      <CommentModal
         postId={postId}
         show={showCommentModalState}
         handleClose={handleCommentClose}
         initialValues={{
           post: postId,
-          text: ""
+          text: "",
         }}
       />
       <div className="container">
-        <h1>Home Page for {user.username}!</h1>
-        <button type="button" onClick={onCreatePost}>
-          Create
-        </button>
-        {posts &&
-          posts
-            .map((post) => (
-              <div className="post-box">
-                <p key={post.id}>
-                  <div>{post.user.username}</div>
-                  <h4>{post.title}</h4>
-                  <div>{post.date_posted}</div>
-                  <body>{post.body}</body>
-                  <div>Rating: {post.rating}</div>
-                  {user.id == post.user.id && 
-                  <button type="button" onClick={() => onEditPost(post)}>
-                    Edit
-                  </button>
-                  }
-                  {user.id == post.user.id &&
-                  <button type="button" onClick={() => onDeletePost(post)}>Delete</button>
-                  }
-                  <button type="button" onClick={() => onCommentClick(post)}>
-                    Comments
-                  </button>
-                </p>
-              </div>
-            ))
-            .reverse()}
+        <div className="row">
+          <div className="col-xs-12 col-md-5 offset-4">
+            <h1>Home Page for {user.username}!</h1>
+            <button className="btn-create" type="button" onClick={onCreatePost}>
+              Create
+            </button>
+            {posts &&
+              posts
+                .map((post) => (
+                  <div className="post-box" key={post.id}>
+                    <br></br>
+                    <div className="row">
+                      <div className="col-md-12 col-xs-12 col-lg-12 px-4">
+                        <div className="card">
+                          <div className="card-header">
+                            <strong>{post.user.username}</strong>:
+                            {post.date_posted}
+                          </div>
+                          <div className="card-body">
+                            <h5 className="card-title">{post.title}</h5>
+                            <p className="card-text">{post.body}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-md-12 col-xs-12 col-lg-12">
+                        Rating: {post.rating}
+                      </div>
+                    </div>
+                    <br></br>
+                    <div className="row align-items-center">
+                      <div
+                        className={
+                          user.id == post.user.id
+                            ? "col-xs-12 col-md-12 col-lg-4"
+                            : "col-xs-12"
+                        }
+                      >
+                        <button
+                          type="button"
+                          className="btn-Comments btn-sm"
+                          onClick={() => onCommentClick(post)}
+                        >
+                          <span>
+                            <i class="fa-solid fa-comments"></i> Comments{" "}
+                          </span>
+                        </button>
+                      </div>
+                      {user.id == post.user.id && (
+                        <>
+                          <div className="col-xs-12 col-md-12 col-lg-4">
+                            <button
+                              className=" btn-edit btn-sm"
+                              type="button"
+                              onClick={() => onEditPost(post)}
+                            >
+                              <i class="fa-solid fa-pencil"></i> Edit
+                            </button>
+                          </div>
+                          <div className="col-xs-12 col-md-12 col-lg-4">
+                            <button
+                              className="btn-sm btn-delete"
+                              type="button"
+                              onClick={() => onDeletePost(post)}
+                            >
+                              <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <br></br>
+                  </div>
+                ))
+                .reverse()}
+          </div>
+        </div>
       </div>
+
+      <style>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous"
+        />
+      </style>
     </>
   );
 };

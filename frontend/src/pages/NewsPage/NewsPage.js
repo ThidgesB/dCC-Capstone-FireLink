@@ -61,7 +61,7 @@ const NewsPage = (props) => {
                 <option value={'570940,PCGamer'}>
                   Dark Souls Remastered
                 </option>
-                <option value={'814380,PCGamesN'}>
+                <option value={'814380,eurogamer'}>
                   Sekiro: Shadows Die Twice
                 </option>
             </select>
