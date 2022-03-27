@@ -20,6 +20,11 @@ const Navbar = () => {
             <b>Requests</b>
           </Link>
         </li>
+        <li className="NewsPage">
+          <Link to="/newspage" style={{ textDecoration: "none", color: "#FF3D00" }}>
+            <b>News</b>
+          </Link>
+        </li>
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>

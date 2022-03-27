@@ -10,5 +10,6 @@ urlpatterns = [
     path('user/editcomment/<int:pk>/', views.edit_comment),
     path('comments/', views.get_all_comments),
     path('user/deletepost/<int:pk>/', views.delete_post),
-    path('user/deletecomment/<int:pk>/', views.delete_comment)
+    path('user/deletecomment/<int:pk>/', views.delete_comment),
+    path('steamexternal/<app_news_request>/', views.get_steam_news),
 ]

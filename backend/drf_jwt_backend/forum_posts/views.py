@@ -1,3 +1,4 @@
+from msilib.schema import AppId
 from xml.etree.ElementTree import Comment
 from django.http import Http404
 from django.shortcuts import render
@@ -6,8 +7,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import ForumPost, Comments, PostRating
-from .serializers import ForumPostSerializer, CommentsSerializer, PostRatingSerializer
+from .serializers import ForumPostSerializer, CommentsSerializer, PostRatingSerializer, AppNewsSerializer
 from django.contrib.auth.models import User
+from rest_framework.request import Request
+import http.client
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -132,3 +137,39 @@ def delete_comment(request, pk):
         else:
             data["failure"] = "delete failed"
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+# 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_steam_news(request, app_news_request):
+    conn = http.client.HTTPSConnection("api.steampowered.com")
+    payload = ''
+    headers = {}
+    # Split on comma, builds an array of two strings
+    app_info = app_news_request.split(',')
+    # remove front single quote
+    app_id = app_info[0].strip("'")
+    # remove back single quote
+    news_source = app_info[1].strip("'")
+    url = f"/ISteamNews/GetNewsForApp/v2/?appid=" + app_id + "&count=5&feeds=" + news_source 
+    conn.request("GET", url, payload, headers)
+    res = conn.getresponse()
+    response = res.read()
+    return Response(response)
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def get_souls_news(request, app_id):
+#     conn = http.client.HTTPSConnection("api.steampowered.com")
+#     payload = ''
+#     headers = {}
+#     app_info = app_id.split(',')
+#     app_id = app_info[0].strip("'") 
+#     news_source = app_info[1].strip("'")
+#     app_id_to_string = f'{app_id}'
+#     url = f"/ISteamNews/GetNewsForApp/v2/?appid=" + app_id + &feeds=PCGamesN"
+#     conn.request("GET", url, payload, headers)
+#     res = conn.getresponse()
+#     response = res.read()
+#     return Response(response)
