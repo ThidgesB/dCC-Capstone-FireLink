@@ -18,7 +18,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
-    <div>
+    <div className="row AppContainer">
+      <div className="col-md-12 col-xs-12 col-lg-12">
       <Navbar />
       <Routes>
         <Route
@@ -45,6 +46,7 @@ function App() {
         </PrivateRoute>} />
       </Routes>
       <Footer />
+      </div>
     </div>
   );
 }

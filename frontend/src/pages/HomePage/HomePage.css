@@ -1,9 +1,8 @@
 .post-box {
   margin: 5vh;
-  border: 1px solid red;
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: #FF3D00;
+  background-color: #271810;
   }
   
 .btn-create {
@@ -16,6 +15,9 @@
 .btn-Comments
 {
   white-space: nowrap;
+  background-color: #ec8e13;
+  border-color: #960018;
+  color: black;
 }
 
 .btn-create:hover {
@@ -24,3 +26,18 @@
   border-color: #960018;  
 }
 
+.btn-edit{
+  background-color: yellow;
+  color: black;
+  border-color: gray;
+}
+
+.btn-delete{
+  background-color: #ff002b81;
+  color: black;
+  border-color: gray;
+}
+
+.rating{
+  color: white;
+}

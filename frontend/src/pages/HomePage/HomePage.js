@@ -118,11 +118,11 @@ const HomePage = () => {
         }}
       />
       <div className="container">
-        <div className="row">
-          <div className="col-xs-12 col-md-5 offset-4">
-            <h1>Home Page for {user.username}!</h1>
+        <div className="row justify-content-center">
+          <div className="col-xs-12 col-md-5 ">
+            <h1 style={{color: 'white'}}>Home Page for {user.username}!</h1>
             <button className="btn-create" type="button" onClick={onCreatePost}>
-              Create
+              Create Post
             </button>
             {posts &&
               posts
@@ -130,11 +130,10 @@ const HomePage = () => {
                   <div className="post-box" key={post.id}>
                     <br></br>
                     <div className="row">
-                      <div className="col-md-12 col-xs-12 col-lg-12 px-4">
+                      <div className="col-md-12 col-xs-12 col-lg-12 ">
                         <div className="card">
                           <div className="card-header">
-                            <strong>{post.user.username}</strong>:
-                            {post.date_posted}
+                            <strong>{post.user.username}</strong><span>: {post.date_posted}</span>
                           </div>
                           <div className="card-body">
                             <h5 className="card-title">{post.title}</h5>
@@ -144,7 +143,7 @@ const HomePage = () => {
                       </div>
                     </div>
 
-                    <div className="row">
+                    <div className="row rating">
                       <div className="col-md-12 col-xs-12 col-lg-12">
                         Rating: {post.rating}
                       </div>

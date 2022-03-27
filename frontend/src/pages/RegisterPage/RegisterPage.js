@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
+import './RegisterPage.css'
 
 const RegisterPage = () => {
   const { registerUser } = useContext(AuthContext);
@@ -17,9 +18,9 @@ const RegisterPage = () => {
   );
 
   return (
-    <div className="container">
+    <div className="container register-container">
       <form className="form" onSubmit={handleSubmit}>
-        <label>
+        <label style={{color:'white'}}>
           Username:{" "}
           <input
             type="text"
@@ -28,7 +29,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label style={{color:'white'}}>
           First Name:{" "}
           <input
             type="text"
@@ -37,7 +38,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label style={{color:'white'}}>
           Last Name:{" "}
           <input
             type="text"
@@ -46,7 +47,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label style={{color:'white'}}>
           Email:{" "}
           <input
             type="text"
@@ -55,7 +56,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label style={{color:'white'}}>
           Password:{" "}
           <input
             type="text"
@@ -64,11 +65,11 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <p style={{ fontSize: "12px" }}>
+        <p style={{ fontSize: "12px", color:'white' }}>
           NOTE: Make this an uncommon password with characters, numbers, and
           special characters!
         </p>
-        <button>Register!</button>
+        <button className="btn-sm register-button">Register!</button>
       </form>
     </div>
   );

@@ -1,0 +1,12 @@
+.register-container{
+    height: 100vh;
+}
+
+.register-button{
+    color: white;
+    border-color: #ec8e13;
+}
+
+.register-button:hover{
+    background-color: #ec8e13;
+}
