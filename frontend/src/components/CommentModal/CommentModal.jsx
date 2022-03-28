@@ -6,6 +6,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import useCustomForm from "../../hooks/useCustomForm";
 import EditComment from "../EditComment/EditComment";
+import './CommentModal.css'
 
 const CommentModal = (props) => {
   const [user, token] = useAuth();
@@ -108,31 +109,41 @@ const CommentModal = (props) => {
       /></>
         <Modal show={props.show} onHide={props.handleClose}>
           <div className="modal-content">
-              <form className="form" onSubmit={handleSubmit}>
+            <br></br>
+            <h5>Create Comment:</h5>
+              <form className="comment-form" onSubmit={handleSubmit}>
                 <input
+                  className="comment-input"
                   type="text"
                   name="text"
                   value={formData.text}
                   onChange={handleInputChange}
                 />
-                <button type="submit">
+                <button className="btn-create2" type="submit">
                   Confirm
                 </button>
               </form>
+              <br></br>
             <div className="container">
-                <h4>Comments</h4>
+                <h4 className="comments-header">Comments</h4>
+                <br></br>
+                <hr></hr>
               {comments &&
                 comments.map((comment) => (
-                  <div className="comment-box">
+                  <div className="comment-container">
                     {comment.post === props.postId && (
                       <>
-                        <h3>{comment.user.username}</h3>
-                        <i>{comment.date_posted}</i>
-                        <p>{comment.text}</p>       
+                        <div className="comment-box">
+                          <h4>{comment.user.username}</h4>
+                          <p>{comment.text}</p>       
+                        </div>
                         {user.id === comment.user.id && 
                         <>
-                        <button type="button" onClick={() => handleEditCommentShowState(comment.id)}>Edit</button>
-                        <button type="button" onClick={() => deleteComment(comment.id)}>Delete</button></>
+                        <button type="button" className="btn-edit" onClick={() => handleEditCommentShowState(comment.id)}>Edit</button>
+                        <button type="button" className="btn-delete" onClick={() => deleteComment(comment.id)}>Delete</button>
+                        <br></br>
+                        <hr></hr>
+                        </>
                         }
                         </>
                     )}

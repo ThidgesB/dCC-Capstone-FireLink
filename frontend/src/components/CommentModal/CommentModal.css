@@ -1,0 +1,32 @@
+.btn-create2{
+    border-radius: 5px;
+    color: #ec8e13;
+    border-color: #ec8e13;
+    font-size: 12px;
+}
+
+.btn-create2:hover{
+    background-color: #ec8e13;
+}
+
+.comment-form{
+    padding: 1px 5px;
+}
+
+.comments-header{
+    text-decoration: underline;
+}
+
+.comment-input{
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+.modal-content{
+    background: linear-gradient(#271810,#b26e49);
+    color: white;
+}
+
+.comment-box{
+    border-color: #ec8e13;
+}

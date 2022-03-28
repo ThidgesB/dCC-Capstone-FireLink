@@ -29,6 +29,7 @@
   border-radius: 5px;
   color: #fbff00;
   border-color: #fbff00;
+  padding: 5px;
 }
 
 .btn-edit:hover{
@@ -39,6 +40,8 @@
 .btn-delete{
   color: #ff002b;
   border-color: #ff002b;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .btn-delete:hover{
