@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-import "./NewsPage.css"
+import "./NewsPage.css";
 
 const NewsPage = (props) => {
   const [newsInfo, setnewsInfo] = useState("1245620,PCGamesN");
@@ -46,8 +46,16 @@ const NewsPage = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col-md-5 col-lg-5 ps-5">
+        <div className="col-md-11 mx-auto">
+          <label for="news" style={{ color: "white" }}>
+            News Selections
+          </label>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-5 col-lg-5 ps-4">
           <select
+            id="news"
             value={newsInfo}
             onChange={(e) => setnewsInfo(e.target.value)}
           >

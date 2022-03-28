@@ -6,36 +6,45 @@
   }
   
 .btn-create {
-  background-color: #FF3D00;
-  color: black;
-  border-color: #960018;
   border-radius: 5px;
+  color: #ec8e13;
+  border-color: #ec8e13;
 }
   
-.btn-Comments
-{
-  white-space: nowrap;
+.btn-Comments{
+  border-color: #ec8e13;
+  color: #ec8e13;
+}
+
+.btn-Comments:hover{
   background-color: #ec8e13;
-  border-color: #960018;
-  color: black;
 }
 
 .btn-create:hover {
   background-color: #ec8e13;
-  color: black;
-  border-color: #960018;  
+  color: white;  
 }
 
 .btn-edit{
-  background-color: yellow;
+  border-radius: 5px;
+  color: #fbff00;
+  border-color: #fbff00;
+}
+
+.btn-edit:hover{
+  background-color: #fbff00;
   color: black;
-  border-color: gray;
 }
 
 .btn-delete{
-  background-color: #ff002b81;
+  color: #ff002b;
+  border-color: #ff002b;
+}
+
+.btn-delete:hover{
+  background-color: #ff002b;
   color: black;
-  border-color: gray;
+  border-color: #ff002b;
 }
 
 .rating{

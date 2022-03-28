@@ -27,26 +27,26 @@ class PostRatingSerializer(serializers.ModelSerializer):
         model = PostRating
         fields = ['id', 'score', 'post', 'user_id']
 
-class SteamNewsArticleSerializer(serializers.Serializer):
-    gid = serializers.CharField()
-    title = serializers.CharField()
-    url = serializers.CharField()
-    is_external_url = serializers.BooleanField()
-    author = serializers.CharField()
-    feedlabel = serializers.CharField()
-    date = serializers.IntegerField()
-    feedname = serializers.CharField()
-    feed_type = serializers.IntegerField()
-    appid = serializers.IntegerField()
+# class SteamNewsArticleSerializer(serializers.Serializer):
+#     gid = serializers.CharField()
+#     title = serializers.CharField()
+#     url = serializers.CharField()
+#     is_external_url = serializers.BooleanField()
+#     author = serializers.CharField()
+#     feedlabel = serializers.CharField()
+#     date = serializers.IntegerField()
+#     feedname = serializers.CharField()
+#     feed_type = serializers.IntegerField()
+#     appid = serializers.IntegerField()
 
         # class Meta:
         #     model = SteamNewsArticle
         #     managed = False
             # fields = ['gid', 'title', 'url', 'is_external_url', 'author', 'feedlabel', 'date', 'feedname', 'feed_type', 'appid']
 
-class AppNewsSerializer(serializers.Serializer):
-    appid = serializers.CharField()
-    newsitems = SteamNewsArticleSerializer()
+# class AppNewsSerializer(serializers.Serializer):
+#     appid = serializers.CharField()
+#     newsitems = SteamNewsArticleSerializer()
 
 
         # newsitems = SteamNewsArticleSerializer(many=True, read_only = True)

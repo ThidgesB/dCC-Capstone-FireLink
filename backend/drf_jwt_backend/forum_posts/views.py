@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import ForumPost, Comments, PostRating
-from .serializers import ForumPostSerializer, CommentsSerializer, PostRatingSerializer, AppNewsSerializer
+from .serializers import ForumPostSerializer, CommentsSerializer, PostRatingSerializer
 from django.contrib.auth.models import User
 from rest_framework.request import Request
 import http.client
@@ -138,6 +138,8 @@ def delete_comment(request, pk):
             data["failure"] = "delete failed"
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+# Steamworks Web API doesn't allow front end servers to make requests.
+# Successful tests in postman were not indicative of success on the front end
 # 
 
 @api_view(['GET'])

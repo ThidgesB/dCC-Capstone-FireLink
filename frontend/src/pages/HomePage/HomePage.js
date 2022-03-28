@@ -121,6 +121,7 @@ const HomePage = () => {
         <div className="row justify-content-center">
           <div className="col-xs-12 col-md-5 ">
             <h1 style={{color: 'white'}}>Home Page for {user.username}!</h1>
+            <br></br>
             <button className="btn-create" type="button" onClick={onCreatePost}>
               Create Post
             </button>
@@ -130,8 +131,8 @@ const HomePage = () => {
                   <div className="post-box" key={post.id}>
                     <br></br>
                     <div className="row">
-                      <div className="col-md-12 col-xs-12 col-lg-12 ">
-                        <div className="card">
+                      <div className="col-md-12 col-xs-12 col-lg-12 px-4">
+                        <div className="card ">
                           <div className="card-header">
                             <strong>{post.user.username}</strong><span>: {post.date_posted}</span>
                           </div>
@@ -175,7 +176,7 @@ const HomePage = () => {
                               type="button"
                               onClick={() => onEditPost(post)}
                             >
-                              <i class="fa-solid fa-pencil"></i> Edit
+                              <i className="fa-solid fa-pencil"></i> Edit
                             </button>
                           </div>
                           <div className="col-xs-12 col-md-12 col-lg-4">
@@ -184,7 +185,7 @@ const HomePage = () => {
                               type="button"
                               onClick={() => onDeletePost(post)}
                             >
-                              <i class="fa-solid fa-trash"></i> Delete
+                              <i className="fa-solid fa-trash"></i> Delete
                             </button>
                           </div>
                         </>

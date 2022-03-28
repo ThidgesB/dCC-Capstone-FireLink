@@ -1,0 +1,17 @@
+.request-box{
+    color: white;
+    margin: 5vh;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #271810;
+}
+
+.btn-offer{
+    border-radius: 5px;
+    color: #ec8e13;
+    border-color: #ec8e13;
+}
+
+.btn-offer:hover{
+    background-color: #ec8e13;
+}
