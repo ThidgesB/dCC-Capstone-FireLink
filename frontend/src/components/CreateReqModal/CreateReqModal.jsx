@@ -21,6 +21,7 @@ const CreateReqModal = props => {
                     Authorization: 'Bearer ' + token
                 }
             })
+            window.location.reload()
         } catch (error) {
             console.log(error.message)
         }

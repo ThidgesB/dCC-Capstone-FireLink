@@ -49,7 +49,24 @@ const HelpRequestPage = () => {
         },
       }
     );
+    getRequests()
   }
+
+  async function getRequests(){
+    try {
+      let response = await axios.get(
+        "http://127.0.0.1:8000/api/help_requests/all/requests/",
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      setRequests(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     const fetchRequests = async () => {

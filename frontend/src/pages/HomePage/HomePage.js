@@ -27,6 +27,7 @@ const HomePage = () => {
 
   const handleClose = () => {
     setShowFormModalState(false);
+    window.location.reload()
   };
 
   const handleEditClose = () => {
@@ -85,6 +86,7 @@ const HomePage = () => {
         },
       }
     );
+    window.location.reload()
   }
 
   return (
