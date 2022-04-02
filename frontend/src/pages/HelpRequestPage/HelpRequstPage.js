@@ -153,7 +153,7 @@ const HelpRequestPage = () => {
                       </div>
                       <div className="row justify-content-center">
                         <div className="col-md-10">
-                          <b>Details: {request.details}</b>
+                          <b>{request.details}</b>
                         </div>
                       </div>
                       <br></br>

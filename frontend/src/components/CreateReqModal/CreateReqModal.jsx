@@ -62,12 +62,12 @@ const CreateReqModal = props => {
                         </label>
                         <label>
                             Platform:{" "}
-                            <input
-                                type='number'
-                                name='platform'
-                                value={formData.platform}
-                                onChange={handleInputChange}
-                            />
+                            <select name='platform' value={formData.platform} onChange={handleInputChange}>
+                                <option value={'1'} className='PS4'>PS4</option>
+                                <option value={'2'} className="XboxOne" >Xbox One</option>
+                                <option value={'3'} className='PCSteam'>PC Steam</option>
+                                <option value={'4'} className="PCEpic">PC Epic Games</option>
+                            </select>
                         </label>
                         <button type='submit' onClick={props.handleClose} >Confirm</button>
                     </form>
