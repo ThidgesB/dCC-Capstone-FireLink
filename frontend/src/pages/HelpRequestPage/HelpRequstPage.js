@@ -49,7 +49,7 @@ const HelpRequestPage = () => {
         },
       }
     );
-    getRequests()
+    await getRequests()
   }
 
   async function getRequests(){
@@ -90,6 +90,7 @@ const HelpRequestPage = () => {
   return (
     <>
       <CreateReqModal
+        getRequests={getRequests}
         show={requestFormModalState}
         handleClose={handleClose}
         initialValues={{

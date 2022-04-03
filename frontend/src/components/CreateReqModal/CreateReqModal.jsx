@@ -21,7 +21,7 @@ const CreateReqModal = props => {
                     Authorization: 'Bearer ' + token
                 }
             })
-            window.location.reload()
+            await props.getRequests()
         } catch (error) {
             console.log(error.message)
         }
@@ -33,6 +33,7 @@ const CreateReqModal = props => {
             <Modal show={props.show} onHide={props.handleClose} >
                 <div className='modal-content'>
                     <form className='form' onSubmit={handleSubmit}>
+                        <br></br>
                         <label>
                             Game:{" "}
                             <input 
@@ -69,7 +70,8 @@ const CreateReqModal = props => {
                                 <option value={'4'} className="PCEpic">PC Epic Games</option>
                             </select>
                         </label>
-                        <button type='submit' onClick={props.handleClose} >Confirm</button>
+                        <button type='submit' className='btn-create' onClick={props.handleClose} >Confirm</button>
+                        <br></br>
                     </form>
                 </div>
             </Modal>

@@ -27,7 +27,6 @@ const HomePage = () => {
 
   const handleClose = () => {
     setShowFormModalState(false);
-    window.location.reload()
   };
 
   const handleEditClose = () => {
@@ -77,6 +76,17 @@ const HomePage = () => {
     delete_post(post);
   };
 
+  async function getAllPosts(){
+    let response = await axios.get('http://127.0.0.1:8000/api/forum_posts/', 
+    {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    }
+    )
+    setPosts(response.data);
+  }
+
   async function delete_post(post) {
     let response = await axios.delete(
       `http://127.0.0.1:8000/api/forum_posts/user/deletepost/${post.id}/`,
@@ -86,12 +96,13 @@ const HomePage = () => {
         },
       }
     );
-    window.location.reload()
+    await getAllPosts()
   }
 
   return (
     <>
       <FormModal
+        getAllPosts={getAllPosts}
         show={showFormModalState}
         handleClose={handleClose}
         initialValues={{
